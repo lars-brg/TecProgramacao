@@ -1,4 +1,4 @@
-package ap2TECPROG;
+package imp.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -6,13 +6,15 @@ import java.awt.GridLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
-	class Tabuleiro extends JPanel{
+	public class Tabuleiro extends JPanel{
+		private static final long serialVersionUID = 1L;
+
 		public Tabuleiro() {
 			super(new GridLayout(8, 8));
 			gerarBotoes();
 		}
 		
-		private void gerarBotoes() {
+		public void gerarBotoes() {
 			for (int linha = 1; linha <= 8; linha++) {
 				for (int coluna = 1; coluna <= 8; coluna++) {
 					
