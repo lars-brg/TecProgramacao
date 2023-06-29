@@ -1,12 +1,16 @@
 package imp.model;
 
+import java.awt.Image;
+
 import javax.swing.ImageIcon;
 
 public class Cavalo extends Robo{
 
-	public Cavalo(int posicaoX, int posicaoY, Celula celulaLocalizada, ImageIcon icone) {
-		super(posicaoX, posicaoY, celulaLocalizada, icone);
-		
+	public Cavalo() {
+		super();
+		this.nome = "Cavalo";
+		this.icone = new ImageIcon("imagens/moxxie icon.png");
+		icone.setImage(icone.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
 	}
 
 }

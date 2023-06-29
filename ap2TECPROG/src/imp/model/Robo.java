@@ -3,16 +3,57 @@ package imp.model;
 import javax.swing.ImageIcon;
 
 public abstract class Robo {
-	private int posicaoX = 1;
-	private int posicaoY = 1;
+	private int id;
+	protected String nome;
 	private Celula celulaLocalizada;
-	private ImageIcon icone;
+	private int pontos;
+	protected ImageIcon icone;
 
-	public Robo(int posicaoX, int posicaoY, Celula celulaLocalizada, ImageIcon icone) {
-		super();
-		this.posicaoX = posicaoX;
-		this.posicaoY = posicaoY;
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public Celula getCelulaLocalizada() {
+		return celulaLocalizada;
+	}
+
+	public void setCelulaLocalizada(Celula celulaLocalizada) {
 		this.celulaLocalizada = celulaLocalizada;
+	}
+
+	public int getPontos() {
+		return pontos;
+	}
+
+	public void setPontos(int pontos) {
+		this.pontos = pontos;
+	}
+	
+	public void ganharPontos() {
+		pontos += 10;
+	}
+
+	public void perderPontos() {
+		pontos -= 15;
+	}
+
+	public ImageIcon getIcone() {
+		return icone;
+	}
+
+	public void setIcone(ImageIcon icone) {
 		this.icone = icone;
 	}
 
