@@ -1,28 +1,14 @@
 package imp.view;
 
 import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Image;
-import java.awt.Insets;
-
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class MenuSecundario extends JPanel {
 	private RoboImagem roboImagem;
-
-	public RoboImagem getRoboImagem() {
-		return roboImagem;
-	}
-
-	public void setRoboImagem(RoboImagem roboImagem) {
-		this.roboImagem = roboImagem;
-	}
+	private BotaoMenuSecundario botaoMenuSecundario;
+	private InicioSuperior inicioSuperior;
 
 	public MenuSecundario() {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -31,17 +17,40 @@ public class MenuSecundario extends JPanel {
 		menuSecundario.setPreferredSize(new Dimension(250, 400));
 		menuSecundario.setBackground(Color.pink);
 
-		BotaoMenuSecundario botaoVertical = new BotaoMenuSecundario();
-		InicioSuperior superior = new InicioSuperior();
-		superior.setPreferredSize(new Dimension(250, 330));
+		this.botaoMenuSecundario = new BotaoMenuSecundario();
+		this.inicioSuperior = new InicioSuperior();
+		inicioSuperior.setPreferredSize(new Dimension(250, 330));
 		this.roboImagem = new RoboImagem();
 		roboImagem.setPreferredSize(new Dimension(280, 80));
 
-		menuSecundario.add(superior);
+		menuSecundario.add(inicioSuperior);
 		menuSecundario.add(roboImagem);
 
-		
-		menuSecundario.add(botaoVertical);
+		menuSecundario.add(botaoMenuSecundario);
 		add(menuSecundario);
+	}
+
+	public BotaoMenuSecundario getBotaoMenuSecundario() {
+		return botaoMenuSecundario;
+	}
+
+	public void setBotaoMenuSecundario(BotaoMenuSecundario botaoMenuSecundario) {
+		this.botaoMenuSecundario = botaoMenuSecundario;
+	}
+
+	public InicioSuperior getInicioSuperior() {
+		return inicioSuperior;
+	}
+
+	public void setInicioSuperior(InicioSuperior inicioSuperior) {
+		this.inicioSuperior = inicioSuperior;
+	}
+
+	public RoboImagem getRoboImagem() {
+		return roboImagem;
+	}
+
+	public void setRoboImagem(RoboImagem roboImagem) {
+		this.roboImagem = roboImagem;
 	}
 }

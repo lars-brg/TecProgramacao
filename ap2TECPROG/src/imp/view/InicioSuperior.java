@@ -4,90 +4,168 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
-
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 import imp.model.Aluno;
-import imp.model.Andador;
-import imp.model.Bispo;
 import imp.model.Bug;
-import imp.model.Cavalo;
 
 public class InicioSuperior extends JPanel {
 	private JPanel iconeQuantidade;
 	private JPanel painelImagens;
+	
 	private JLabel pontuacao;
+	private JLabel Aluno;
+	private JLabel valoresAluno;
+	private JLabel Bug;
+	private JLabel valoresBug;
+	private JLabel Andador;
+	private JLabel pontosAndador;
+	private JLabel Cavalo;
+	private JLabel pontosCavalo;
+	private JLabel Bispo;
+	private JLabel pontosBispo;
+	
 	private int quantidadeAluno = 0;
 	private int quantidadeBug = 0;
-	private int pontosAndador = 0;
-	private int pontosBispo = 0;
-	private int pontosCavalo = 0;
-	private int pontosTotais = pontosAndador + pontosBispo + pontosCavalo;
+	private int pontuacaoAndador = 0;
+	private int pontuacaoBispo = 0;
+	private int pontuacaoCavalo = 0;
+	private int pontuacaoTotal = pontuacaoAndador + pontuacaoBispo + pontuacaoCavalo;
 
 	public InicioSuperior() {
 		setBackground(Color.pink);
 
-		// Cria o painel de ícones da lateral (Alunos e Bugs)
 		iconeQuantidade = new JPanel();
 		iconeQuantidade.setPreferredSize(new Dimension(280, 50));
 		iconeQuantidade.setBackground(Color.pink);
 		iconeQuantidade.setBorder(BorderFactory.createEmptyBorder(-5, 0, 0, 0));
 
-		// Cria o painel dos robôs da lateral e suas respectivas pontuações (Andador,
-		// Bispo e Cavalo)
 		painelImagens = new JPanel();
 		painelImagens.setLayout(new BoxLayout(painelImagens, BoxLayout.X_AXIS));
 		painelImagens.setBackground(Color.pink);
 		painelImagens.setPreferredSize(new Dimension(215, 150));
-		painelImagens.setBorder(BorderFactory.createEmptyBorder(-25, 0, 0, 0));
+		painelImagens.setBorder(BorderFactory.createEmptyBorder(-35, 0, 0, 0));
 
 		ImageIcon abertura = new ImageIcon("imagens/imp.png");
 		abertura.setImage(abertura.getImage().getScaledInstance(180, 130, Image.SCALE_SMOOTH));
 		JLabel logo = new JLabel(abertura);
-		pontuacao = new JLabel("Pontuação: ");
-		JLabel quantidadePontos = new JLabel(String.valueOf(pontosTotais));
+		pontuacao = new JLabel("Pontuação: " + String.valueOf(pontuacaoTotal));
+		
+		this.pontuacaoTotal = pontuacaoTotal;
 
-		JLabel bugs = new JLabel(new Bug().getIcone());
-		// JLabel quantidadeBug = new JLabel(": 8");
+		this.Bug = new JLabel(new Bug().getIcone());
+		valoresBug = new JLabel(String.valueOf(quantidadeBug));
 
-		JLabel alunos = new JLabel(new Aluno().getIcone());
-		// quantidadeAluno = new JLabel(": 8");
+		this.Aluno = new JLabel(new Aluno().getIcone());
+		valoresAluno = new JLabel(String.valueOf(quantidadeAluno));
 
-		ImageIcon andador = new ImageIcon("imagens/blitzo full.png");
-		andador.setImage(andador.getImage().getScaledInstance(60, 100, Image.SCALE_SMOOTH));
-		JLabel roboA = new JLabel(andador);
-		// pontosAndador = new JLabel("10");
+		this.Andador = new JLabel(new PontuacaoRobo().getImagemAndador());
+		pontosAndador = new JLabel(String.valueOf(pontuacaoAndador));
 
-		ImageIcon cavalo = new ImageIcon("imagens/millie full.png");
-		cavalo.setImage(cavalo.getImage().getScaledInstance(60, 100, Image.SCALE_SMOOTH));
-		JLabel roboC = new JLabel(cavalo);
-		// JLabel pontC = new JLabel("-15");
+		this.Cavalo = new JLabel(new PontuacaoRobo().getImagemCavalo());
+		pontosCavalo = new JLabel(String.valueOf(pontuacaoCavalo));
 
-		ImageIcon bispo = new ImageIcon("imagens/moxxie full.png");
-		bispo.setImage(bispo.getImage().getScaledInstance(50, 100, Image.SCALE_SMOOTH));
-		JLabel roboB = new JLabel(bispo);
-		// pontosBispo = new JLabel("0");
+		this.Bispo = new JLabel(new PontuacaoRobo().getImagemBispo());
+		pontosBispo = new JLabel(String.valueOf(pontuacaoBispo));
 
 		add(logo);
 		add(pontuacao);
-		iconeQuantidade.add(alunos);
-		iconeQuantidade.add(new JLabel(String.valueOf(this.quantidadeAluno)));
-		iconeQuantidade.add(bugs);
-		iconeQuantidade.add(new JLabel(String.valueOf(this.quantidadeBug)));
-		painelImagens.add(roboA);
-		painelImagens.add(new JLabel(String.valueOf(this.pontosAndador)));
-		painelImagens.add(roboC);
-		painelImagens.add(new JLabel(String.valueOf(this.pontosCavalo)));
-		painelImagens.add(roboB);
-		painelImagens.add(new JLabel(String.valueOf(this.pontosBispo)));
+
+		iconeQuantidade.add(Aluno);
+		iconeQuantidade.add(valoresAluno);
+		iconeQuantidade.add(Bug);
+		iconeQuantidade.add(valoresBug);
+		painelImagens.add(createRoboPanel(Andador, pontosAndador));
+		painelImagens.add(createRoboPanel(Cavalo, pontosCavalo));
+		painelImagens.add(createRoboPanel(Bispo, pontosBispo));
 
 		setLayout(new FlowLayout());
 		add(iconeQuantidade);
 		add(painelImagens);
+	}
+
+	private JPanel createRoboPanel(JLabel roboLabel, JLabel pontosLabel) {
+		JPanel roboPanel = new JPanel();
+		roboPanel.setLayout(new BoxLayout(roboPanel, BoxLayout.Y_AXIS));
+		roboPanel.setBackground(Color.pink);
+		roboPanel.setPreferredSize(new Dimension(70, 100));
+		roboPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 10));
+
+		roboPanel.add(roboLabel);
+		roboPanel.add(pontosLabel);
+
+		return roboPanel;
+	}
+
+	public JLabel getPontuacao() {
+		return pontuacao;
+	}
+
+	public void setPontuacao(JLabel pontuacao) {
+		this.pontuacao = pontuacao;
+	}
+
+	public JLabel getValoresBug() {
+		return valoresBug;
+	}
+
+	public void setValoresBug(JLabel valoresBug) {
+		this.valoresBug = valoresBug;
+	}
+
+	public JLabel getValoresAluno() {
+		return valoresAluno;
+	}
+
+	public void setValoresAluno(JLabel valoresAluno) {
+		this.valoresAluno = valoresAluno;
+	}
+
+	public JLabel getPontosAndador() {
+		return pontosAndador;
+	}
+
+	public void setPontosAndador(JLabel pontosAndador) {
+		this.pontosAndador = pontosAndador;
+	}
+
+	public JLabel getPontosCavalo() {
+		return pontosCavalo;
+	}
+
+	public void setPontosCavalo(JLabel pontosCavalo) {
+		this.pontosCavalo = pontosCavalo;
+	}
+
+	public JLabel getPontosBispo() {
+		return pontosBispo;
+	}
+
+	public void setPontosBispo(JLabel pontosBispo) {
+		this.pontosBispo = pontosBispo;
+	}
+
+	public void resgatarAluno() {
+		this.quantidadeAluno += 1;
+	}
+
+	public void encontrarBug() {
+		this.quantidadeBug += 1;
+	}
+	
+	public void alterarValor(String valor) {
+		pontosAndador.setText(valor);
+	}
+
+	public int getPontuacaoTotal() {
+		return pontuacaoTotal;
+	}
+
+	public void setPontuacaoTotal(int pontuacaoTotal) {
+		this.pontuacaoTotal = pontuacaoTotal;
 	}
 
 	public int getQuantidadeAluno() {
@@ -105,68 +183,5 @@ public class InicioSuperior extends JPanel {
 	public void setQuantidadeBug(int quantidadeBug) {
 		this.quantidadeBug = quantidadeBug;
 	}
-
-	public int getPontosAndador() {
-		return pontosAndador;
-	}
-
-	public void setPontosAndador(int pontosAndador) {
-		this.pontosAndador = pontosAndador;
-	}
-
-	public int getPontosBispo() {
-		return pontosBispo;
-	}
-
-	public void setPontosBispo(int pontosBispo) {
-		this.pontosBispo = pontosBispo;
-	}
-
-	public int getPontosCavalo() {
-		return pontosCavalo;
-	}
-
-	public void setPontosCavalo(int pontosCavalo) {
-		this.pontosCavalo = pontosCavalo;
-	}
-
-	public int getPontosTotais() {
-		return pontosTotais;
-	}
-
-	public void setPontosTotais(int pontosTotais) {
-		this.pontosTotais = pontosTotais;
-	}
-
-	public void resgatarAluno() {
-		this.quantidadeAluno += 1;
-	}
-	public void encontrarBug() {
-		this.quantidadeBug += 1;
-	}
-	public void atualizarValores(int quantidadeAluno, int quantidadeBug, int pontosAndador, int pontosBispo, int pontosCavalo) {
-		this.quantidadeAluno = quantidadeAluno;
-		this.quantidadeBug = quantidadeBug;
-		this.pontosAndador = pontosAndador;
-		this.pontosBispo = pontosBispo;
-		this.pontosCavalo = pontosCavalo;
-		
-		pontosTotais = this.pontosAndador + this.pontosBispo + this.pontosCavalo;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

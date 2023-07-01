@@ -1,11 +1,7 @@
 package imp.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.LayoutManager;
-
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 
 public class BotaoMenuSecundario extends JPanel {

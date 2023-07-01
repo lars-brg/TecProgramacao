@@ -6,17 +6,19 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.OverlayLayout;
-
-import imp.model.Robo;
 
 public class RoboImagem extends JPanel {
 	private int roboEscolhido;
 	private ImageIcon backgroundIcon;
+	private ImageIcon iconeAndador;
+	private ImageIcon iconeBispo;
+	private ImageIcon iconeCavalo;
+	private Botao botaoAndador;
+	private Botao botaoBispo;
+	private Botao botaoCavalo;
 
 	public RoboImagem() {
 		setBackground(Color.pink);
@@ -24,50 +26,53 @@ public class RoboImagem extends JPanel {
 		backgroundIcon = new ImageIcon("imagens/logoModel.png");
 		backgroundIcon.setImage(backgroundIcon.getImage().getScaledInstance(200, 70, Image.SCALE_SMOOTH));
 
-		ImageIcon iconeAndador = new ImageIcon("imagens/blitzo icon.png");
+		iconeAndador = new ImageIcon("imagens/blitzo icon.png");
 		iconeAndador.setImage(iconeAndador.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
-		Botao iconeA = new Botao("", null, iconeAndador);
-		iconeA.setPreferredSize(new Dimension(75, 65));
-		iconeA.setOpaque(false);
+		botaoAndador = new Botao("", null, iconeAndador);
+		botaoAndador.setPreferredSize(new Dimension(75, 65));
+		botaoAndador.setOpaque(false);
 
-		ImageIcon iconeCavalo = new ImageIcon("imagens/moxxie icon.png");
+		iconeCavalo = new ImageIcon("imagens/moxxie icon.png");
 		iconeCavalo.setImage(iconeCavalo.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
-		Botao iconeC = new Botao("", null, iconeCavalo);
-		iconeC.setPreferredSize(new Dimension(75, 65));
-		iconeC.setOpaque(false);
+		botaoCavalo = new Botao("", null, iconeCavalo);
+		botaoCavalo.setPreferredSize(new Dimension(75, 65));
+		botaoCavalo.setOpaque(false);
 
-		ImageIcon iconeBispo = new ImageIcon("imagens/millie icon.png");
+		iconeBispo = new ImageIcon("imagens/millie icon.png");
 		iconeBispo.setImage(iconeBispo.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH));
-		Botao iconeB = new Botao("", null, iconeBispo);
-		iconeB.setPreferredSize(new Dimension(75, 65));
-		iconeB.setOpaque(false);
+		botaoBispo = new Botao("", null, iconeBispo);
+		botaoBispo.setPreferredSize(new Dimension(75, 65));
+		botaoBispo.setOpaque(false);
 
 		setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		add(iconeA);
-		add(iconeB);
-		add(iconeC);
+		add(botaoAndador);
+		add(botaoBispo);
+		add(botaoCavalo);
 
-		iconeA.addActionListener(new ActionListener() {
+		botaoAndador.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				botaoAndador.setEnabled(false);
 				setRoboEscolhido(1);
 			}
 		});
 
-		iconeB.addActionListener(new ActionListener() {
+		botaoBispo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				botaoBispo.setEnabled(false);
 				setRoboEscolhido(2);
 
 			}
 		});
 
-		iconeC.addActionListener(new ActionListener() {
+		botaoCavalo.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				botaoCavalo.setEnabled(false);
 				setRoboEscolhido(3);
 
 			}
@@ -92,6 +97,30 @@ public class RoboImagem extends JPanel {
 	public void setRoboEscolhido(int roboEscolhido) {
 		this.roboEscolhido = roboEscolhido;
 		System.out.println(this.getRoboEscolhido());
+	}
+
+	public Botao getBotaoAndador() {
+		return botaoAndador;
+	}
+
+	public void setBotaoAndador(Botao botaoAndador) {
+		this.botaoAndador = botaoAndador;
+	}
+
+	public Botao getBotaoBispo() {
+		return botaoBispo;
+	}
+
+	public void setBotaoBispo(Botao botaoBispo) {
+		this.botaoBispo = botaoBispo;
+	}
+
+	public Botao getBotaoCavalo() {
+		return botaoCavalo;
+	}
+
+	public void setBotaoCavalo(Botao botaoCavalo) {
+		this.botaoCavalo = botaoCavalo;
 	}
 
 }

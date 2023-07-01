@@ -7,6 +7,8 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import imp.model.ElementoJogo;
+import imp.view.InicioSuperior;
 import imp.view.Menu;
 import imp.view.MenuSecundario;
 import imp.view.Tabuleiro;
@@ -18,6 +20,8 @@ public class Jogo extends JFrame {
 	private MenuSecundario menuSecundario;
 	private Gerenciador gerenciador;
 	private TelaInicial telaInicial;
+	private InicioSuperior inicioSuperior;
+	private ElementoJogo elementoJogo;
 
 	public Jogo() {
 		super("Ilha de Java");
@@ -28,16 +32,14 @@ public class Jogo extends JFrame {
 		setIconImage(icon);
 
 		JPanel painelPrincipal = new JPanel(new BorderLayout());
-		// TelaInicial telaInicial = new TelaInicial();
 
 		tabuleiro = new Tabuleiro();
 		menu = new Menu();
 		telaInicial = new TelaInicial();
 		menuSecundario = new MenuSecundario();
-		gerenciador = new Gerenciador(tabuleiro, menuSecundario, menu, telaInicial, this);
+		menuSecundario.getBotaoMenuSecundario().getProxJogada().setEnabled(false);
+		gerenciador = new Gerenciador(tabuleiro, menuSecundario, menu, telaInicial, this, inicioSuperior, elementoJogo);
 		gerenciador.popularTabuleiro(tabuleiro);
-		// ImgBackground imagemFundo = new ImgBackground();
-		// imagemFundo.setSize(900, 700);
 
 		menu.setVisible(true);
 		telaInicial.setVisible(true);
@@ -48,8 +50,6 @@ public class Jogo extends JFrame {
 		painelPrincipal.add(telaInicial, BorderLayout.CENTER);
 		painelPrincipal.add(tabuleiro, BorderLayout.CENTER);
 		painelPrincipal.add(menuSecundario, BorderLayout.EAST);
-
-		// painelPrincipal.add(imagemFundo);
 
 		add(painelPrincipal);
 		setVisible(true);
